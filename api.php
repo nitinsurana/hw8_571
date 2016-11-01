@@ -80,11 +80,11 @@ if (isset($_REQUEST['submit'])) {
     $apiUrl = "";
     switch ($apiBase) {
         case "Legislators":
-            $apiUrl = "http://congress.api.sunlightfoundation.com/legislators?per_page=all&apikey=" . API_KEY;     //chamber=" . $chamber . $state . "&apikey=" . API_KEY;
+            $apiUrl = "http://congress.api.sunlightfoundation.com/legislators?per_page=all&apikey=" . API_KEY;
             $pjson = callApi($apiUrl);
             break;
         case "Committees":
-            $apiUrl = "http://congress.api.sunlightfoundation.com/committees?committee_id=" . strtoupper($rawKeyword) . "&chamber=" . $chamber . "&apikey=" . API_KEY;
+            $apiUrl = "http://congress.api.sunlightfoundation.com/committees?per_page=all&chamber=" . $chamber . "&apikey=" . API_KEY;
             $pjson = callApi($apiUrl);
             break;
         case "Bills":

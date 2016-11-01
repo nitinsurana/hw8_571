@@ -13,7 +13,9 @@
 //TODO Mobile screen responsiveness (check the video)
 //TODO deploy on AWS for 571
 //TODO instead of creating entirely new active & new bills <table> => create a component and use it with different filters
-//TOOD fix the 404s for legislators' bioguide_id.jpg
+//TODO fix the 404s for legislators' bioguide_id.jpg
+//TODO chamber has a 3rd possible value => joint(s.svg) =>handle in all tabs for legislator, bills, committee
+
 
 window.API_KEY = '682b365f52874343b644bc3d6a0149e4';
 
@@ -22,6 +24,35 @@ var app = angular.module('app', ['angularUtils.directives.dirPagination']);
 app.controller('MainController', function MainController($scope) {
     $scope.menu = 'legislators';
 });
+
+
+app.controller('CommitteeController', function ($scope, $http) {
+    $scope.results = [];
+    $http.get('api.php?submit=true&db=Committees&keyword=&chamber=&page=' + $scope.page).then(function (response) {
+        var results = response.data.results;
+        results.forEach(function (o) {
+            if (window.localStorage.getItem('committee-' + o.committee_id)) {
+                o.favourite = true;
+            } else {
+                o.favourite = false;
+            }
+        });
+        $scope.results = results;
+        $scope.itemsPerPage = 10;
+    });
+    $scope.toggleLocalStorageFavourite = function (committee_id) {
+        if (window.localStorage.getItem('committee-' + committee_id)) {
+            window.localStorage.removeItem('committee-' + committee_id);
+        } else {
+            window.localStorage.setItem('committee-' + committee_id, committee_id);
+        }
+        var r = $scope.results.find(function (o) {
+            return o.committee_id === committee_id;
+        });
+        r.favourite = !r.favourite;
+    }
+});
+
 
 app.controller('BillsController', function BillsController($scope, $http) {
     $scope.results = [];

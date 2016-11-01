@@ -47,6 +47,7 @@
         </div>
         <?php include('legislators.php')?>
         <?php include('bills.php')?>
+        <?php include('committees.php')?>
     </div>
 </div>
 </body>
