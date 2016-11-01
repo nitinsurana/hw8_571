@@ -88,7 +88,7 @@ if (isset($_REQUEST['submit'])) {
             $pjson = callApi($apiUrl);
             break;
         case "Bills":
-            $apiUrl = "http://congress.api.sunlightfoundation.com/bills?bill_id=" . strtolower($rawKeyword) . "&chamber=" . $chamber . "&apikey=" . API_KEY;
+            $apiUrl = "http://congress.api.sunlightfoundation.com/bills?per_page=50&chamber=" . $chamber . "&apikey=" . API_KEY;
             $pjson = callApi($apiUrl);
             break;
         case "Amendments":
