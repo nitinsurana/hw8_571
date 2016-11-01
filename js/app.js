@@ -52,6 +52,15 @@ app.controller('CommitteeController', function ($scope, $http) {
         r.favourite = !r.favourite;
     }
 });
+app.controller('CommitteeHouseController',function () {
+
+});
+app.controller('CommitteeSenateController',function () {
+
+});
+app.controller('CommitteeJointController',function () {
+
+});
 
 
 app.controller('BillsController', function BillsController($scope, $http) {

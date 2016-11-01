@@ -45,6 +45,7 @@
                                             <td class="text-capitalize">
                                                 <img ng-if="b.chamber==='house'" src="images/h.png" height="20" width="20"/>
                                                 <img ng-if="b.chamber==='senate'" src="images/s.svg" height="20" width="20"/>
+                                                <img ng-if="b.chamber==='joint'" src="images/s.svg" height="20" width="20"/>
                                                 {{b.chamber}}
                                             </td>
                                             <td>{{b.introduced_on}}</td>
@@ -94,6 +95,7 @@
                                             <td class="text-capitalize">
                                                 <img ng-if="b.chamber==='house'" src="images/h.png" height="20" width="20"/>
                                                 <img ng-if="b.chamber==='senate'" src="images/s.svg" height="20" width="20"/>
+                                                <img ng-if="b.chamber==='joint'" src="images/s.svg" height="20" width="20"/>
                                                 {{b.chamber}}
                                             </td>
                                             <td>{{b.introduced_on}}</td>

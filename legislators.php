@@ -49,6 +49,7 @@
                                             <td class="text-capitalize">
                                                 <img ng-if="r.chamber==='house'" src="images/h.png" height="20" width="20"/>
                                                 <img ng-if="r.chamber==='senate'" src="images/s.svg" height="20" width="20"/>
+                                                <img ng-if="r.chamber==='joint'" src="images/s.svg" height="20" width="20"/>
                                                 {{r.chamber}}
                                             </td>
                                             <td class="text-capitalize">{{r.district? ('District '+r.district) : 'N/A'}}</td>
@@ -99,6 +100,7 @@
                                             <td class="text-capitalize">
                                                 <img ng-if="r.chamber==='house'" src="images/h.png" height="20" width="20"/>
                                                 <img ng-if="r.chamber==='senate'" src="images/s.svg" height="20" width="20"/>
+                                                <img ng-if="r.chamber==='joint'" src="images/s.svg" height="20" width="20"/>
                                                 {{r.chamber}}
                                             </td>
                                             <td class="text-capitalize">{{r.district? ('District '+r.district) : 'N/A'}}</td>
@@ -148,6 +150,7 @@
                                             <td class="text-capitalize">
                                                 <img ng-if="r.chamber==='house'" src="images/h.png" height="20" width="20"/>
                                                 <img ng-if="r.chamber==='senate'" src="images/s.svg" height="20" width="20"/>
+                                                <img ng-if="r.chamber==='joint'" src="images/s.svg" height="20" width="20"/>
                                                 {{r.chamber}}
                                             </td>
                                             <td>{{r.state_name}}</td>
