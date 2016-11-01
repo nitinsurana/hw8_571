@@ -54,13 +54,13 @@
                     <div class="item active">
                         <div class="tab-container">
                             <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">By State</a></li>
-                                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">House</a></li>
+                                <li role="presentation" class="active"><a href="#legislator-state" role="tab" data-toggle="tab">By State</a></li>
+                                <li role="presentation"><a href="#legislator-house"  role="tab" data-toggle="tab">House</a></li>
                                 <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Senate</a></li>
                             </ul>
                             <div class="tab-content">
                                 <br>
-                                <div role="tabpanel" class="tab-pane active" id="home">
+                                <div role="tabpanel" class="tab-pane active" id="legislator-state" ng-controller="LegislatorStateController">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <div class="row">
@@ -112,21 +112,55 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div role="tabpanel" class="tab-pane" id="profile">
-                                    <table class="table  table-responsive table-striped">
-                                        <thead>
-                                        <tr>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr ng-repeat="r in results">
-                                            <td>{{r.first_name}}</td>
-                                            <td>{{r.last_name}}</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                <div role="tabpanel" class="tab-pane active" id="legislator-house" ng-controller="LegislatorHouseController">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="pull-right">
+                                                        <input type="text" class="form-control" name="house-search" ng-model="search" placeholder="Search">
+                                                    </div>
+                                                    <h3 class="panel-title">Legislators By House</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <table class="table  table-responsive">
+                                                <thead>
+                                                <tr>
+                                                    <th>Party</th>
+                                                    <th>Name</th>
+                                                    <th>Chamber</th>
+                                                    <th>District</th>
+                                                    <th>State</th>
+                                                    <th></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr dir-paginate="r in results | filter:{chamber:'house'} | filter:search | itemsPerPage: 10">
+                                                    <td>
+                                                        <img ng-if="(r.party && r.party==='R')" src="images/r.png" class="img-responsive" height="20" width="20">
+                                                        <img ng-if="(r.party && r.party==='D')" src="images/r.png" class="img-responsive" height="20" width="20">
+                                                    </td>
+                                                    <td>{{r.first_name+' '+ r.last_name}}</td>
+                                                    <td class="text-capitalize">
+                                                        <img ng-if="r.chamber==='house'" src="images/h.png" height="20" width="20"/>
+                                                        <img ng-if="r.chamber==='senate'" src="images/s.svg" height="20" width="20"/>
+                                                        {{r.chamber}}
+                                                    </td>
+                                                    <td class="text-capitalize">{{r.district? ('District '+r.district) : 'N/A'}}</td>
+                                                    <td>{{r.state_name}}</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary" ng-click="showLegislatorDetails(r.bioguide_id)">View Details</button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="text-center">
+                                                <dir-pagination-controls></dir-pagination-controls>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="messages">
                                     <table class="table  table-responsive table-striped">
