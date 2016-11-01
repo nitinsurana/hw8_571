@@ -122,7 +122,7 @@
                             <button class="btn btn-default" ng-click="showPrevTabCarousel()"><i class="fa fa-chevron-left"></i>&nbsp;</button>
                             Details
                             <div class="pull-right">
-                                <button class="btn btn-default" ng-click="toggleLocalStorageFavourite(bill.bill_id)"><i class="fa {{bill.favourite ? 'fa-star':'fa-star-o'}}"></i>&nbsp;
+                                <button class="btn btn-default" ng-click="toggleLocalStorageFavorite(bill.bill_id)"><i class="fa {{bill.favorite ? 'fa-star':'fa-star-o'}}"></i>&nbsp;
                                 </button>
                             </div>
                         </h2>

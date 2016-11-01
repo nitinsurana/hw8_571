@@ -15,6 +15,7 @@
 //TODO instead of creating entirely new active & new bills <table> => create a component and use it with different filters
 //TODO fix the 404s for legislators' bioguide_id.jpg
 //TODO chamber has a 3rd possible value => joint(s.svg) =>handle in all tabs for legislator, bills, committee
+//TODO after selecting a favorite, the favorites menu doesn't load again to show the newly added favorites because the controller does not execute again
 
 
 window.API_KEY = '682b365f52874343b644bc3d6a0149e4';
@@ -25,6 +26,47 @@ app.controller('MainController', function MainController($scope) {
     $scope.menu = 'legislators';
 });
 
+app.controller('FavoritesController', function ($scope) {
+    $scope.fetch = function (k) {
+        var results = [];
+        var length = window.localStorage.length;
+        for (var i = 0; i < length; i++) {
+            var key = window.localStorage.key(i);
+            if (key.indexOf(k) == 0) {
+                var r = window.localStorage.getItem(window.localStorage.key(i));
+                results.push(JSON.parse(r));
+            }
+        }
+        return results;
+    };
+});
+app.controller('FavoritesLegislatorController', function ($scope) {
+    $scope.results = $scope.fetch('legislator-');
+    $scope.navigateToRoute = function () {
+
+    };
+    $scope.navigateToBillRoute = function () {
+
+    };
+    $scope.removeFavorite = function (key, index) {
+        window.localStorage.removeItem(key);
+        $scope.results.splice(index, 1);
+    }
+});
+app.controller('FavoritesBillController', function ($scope) {
+    $scope.results = $scope.fetch('bill-');
+    $scope.removeFavorite = function (key, index) {
+        window.localStorage.removeItem(key);
+        $scope.results.splice(index, 1);
+    }
+});
+app.controller('FavoritesCommitteeController', function ($scope) {
+    $scope.results = $scope.fetch('committee-');
+    $scope.removeFavorite = function (key, index) {
+        window.localStorage.removeItem(key);
+        $scope.results.splice(index, 1);
+    }
+});
 
 app.controller('CommitteeController', function ($scope, $http) {
     $scope.results = [];
@@ -32,33 +74,33 @@ app.controller('CommitteeController', function ($scope, $http) {
         var results = response.data.results;
         results.forEach(function (o) {
             if (window.localStorage.getItem('committee-' + o.committee_id)) {
-                o.favourite = true;
+                o.favorite = true;
             } else {
-                o.favourite = false;
+                o.favorite = false;
             }
         });
         $scope.results = results;
         $scope.itemsPerPage = 10;
     });
-    $scope.toggleLocalStorageFavourite = function (committee_id) {
-        if (window.localStorage.getItem('committee-' + committee_id)) {
-            window.localStorage.removeItem('committee-' + committee_id);
-        } else {
-            window.localStorage.setItem('committee-' + committee_id, committee_id);
-        }
+    $scope.toggleLocalStorageFavorite = function (committee_id) {
         var r = $scope.results.find(function (o) {
             return o.committee_id === committee_id;
         });
-        r.favourite = !r.favourite;
+        if (window.localStorage.getItem('committee-' + committee_id)) {
+            window.localStorage.removeItem('committee-' + committee_id);
+        } else {
+            window.localStorage.setItem('committee-' + committee_id, JSON.stringify(r));
+        }
+        r.favorite = !r.favorite;
     }
 });
-app.controller('CommitteeHouseController',function () {
+app.controller('CommitteeHouseController', function () {
 
 });
-app.controller('CommitteeSenateController',function () {
+app.controller('CommitteeSenateController', function () {
 
 });
-app.controller('CommitteeJointController',function () {
+app.controller('CommitteeJointController', function () {
 
 });
 
@@ -74,19 +116,19 @@ app.controller('BillsController', function BillsController($scope, $http) {
             return o.bill_id === bill_id;
         });
         var b = $scope.bill = result;
-        $scope.bill.favourite = window.localStorage.getItem('bill-' + b.bill_id) && true;
+        $scope.bill.favorite = window.localStorage.getItem('bill-' + b.bill_id) && true;
         $("#carousel-bills").carousel('next');
     };
     $scope.showPrevTabCarousel = function () {
         $("#carousel-bills").carousel('prev');
     };
-    $scope.toggleLocalStorageFavourite = function (bioguideId) {
+    $scope.toggleLocalStorageFavorite = function (bioguideId) {
         if (window.localStorage.getItem('bill-' + bioguideId)) {
             window.localStorage.removeItem('bill-' + bioguideId);
         } else {
-            window.localStorage.setItem('bill-' + bioguideId, bioguideId);
+            window.localStorage.setItem('bill-' + bioguideId, JSON.stringify($scope.bill));
         }
-        $scope.bill.favourite = !$scope.bill.favourite;
+        $scope.bill.favorite = !$scope.bill.favorite;
     }
 });
 app.controller('BillsActiveController', function BillsActiveController($scope, $http) {
@@ -108,7 +150,7 @@ app.controller('LegislatorController', function LegislatorController($scope, $ht
             return (o.bioguide_id === bioguideId);
         });
         var l = $scope.legislator = result;
-        $scope.legislator.favourite = window.localStorage.getItem('legislator-' + l.bioguide_id) && true;
+        $scope.legislator.favorite = window.localStorage.getItem('legislator-' + l.bioguide_id) && true;
         $("#carousel-legislators").carousel('next');
         $http.get('http://congress.api.sunlightfoundation.com/committees?per_page=5&member_ids=' + bioguideId + '&apikey=' + window.API_KEY).then(function (response) {
             if (response.data.results && response.data.results.length > 0) {
@@ -126,17 +168,17 @@ app.controller('LegislatorController', function LegislatorController($scope, $ht
         $("#carousel-legislators").carousel('prev');
     };
 
-    $scope.toggleLocalStorageFavourite = function (bioguideId) {
+    $scope.toggleLocalStorageFavorite = function (bioguideId) {
         if (window.localStorage.getItem('legislator-' + bioguideId)) {
             window.localStorage.removeItem('legislator-' + bioguideId);
         } else {
-            window.localStorage.setItem('legislator-' + bioguideId, bioguideId);
+            window.localStorage.setItem('legislator-' + bioguideId, JSON.stringify($scope.legislator));
         }
-        $scope.legislator.favourite = !$scope.legislator.favourite;
+        $scope.legislator.favorite = !$scope.legislator.favorite;
     }
 });
 
-app.controller('LegislatorStateController', function ContentController($scope, $http) {
+app.controller('LegislatorStateController', function LegislatorStateController($scope, $http) {
     var self = this;
     $scope.states = ["Alabama", "Montana", "Alaska", "Nebraska", "Arizona", "Arkansas", "Colorado", "Nevada", "New Hampshire", "California", "New Jersey", "New Mexico", "Connecticut", "New York", "Delaware", "North Carolina", "District Of Columbia", "North Dakota", "Florida", "Ohio", "Georgia", "Oklahoma", "Hawaii", "Oregon", "Idaho", "Pennsylvania", "Illinois", "Rhode Island", "Indiana", "South Carolina", "Iowa", "South Dakota", "Kansas", "Tennessee", "Kentucky", "Texas", "Louisiana", "Utah", "Maine", "Vermont", "Maryland", "Virginia", "Massachusetts", "Washington", "Michigan", "West Virginia", "Minnesota", "Wisconsin", "Mississippi", "Wyoming", "Missouri"];
 });

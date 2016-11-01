@@ -41,7 +41,7 @@
                                         <tbody>
                                         <tr dir-paginate="r in results | filter:{chamber:'house'} |filter:search | itemsPerPage: 10" pagination-id="committee-house">
                                             <td>
-                                                <button class="btn btn-default" ng-click="toggleLocalStorageFavourite(r.committee_id)"><i class="fa {{r.favourite ? 'fa-star':'fa-star-o'}}"></i>&nbsp;
+                                                <button class="btn btn-default" ng-click="toggleLocalStorageFavorite(r.committee_id)"><i class="fa {{r.favorite ? 'fa-star':'fa-star-o'}}"></i>&nbsp;
                                                 </button>
                                             </td>
                                             <td class="text-capitalize">
@@ -92,7 +92,7 @@
                                         <tbody>
                                         <tr dir-paginate="r in results | filter:{chamber:'senate'} |filter:search | itemsPerPage: 10" pagination-id="committee-senate">
                                             <td>
-                                                <button class="btn btn-default" ng-click="toggleLocalStorageFavourite(r.committee_id)"><i class="fa {{r.favourite ? 'fa-star':'fa-star-o'}}"></i>&nbsp;
+                                                <button class="btn btn-default" ng-click="toggleLocalStorageFavorite(r.committee_id)"><i class="fa {{r.favorite ? 'fa-star':'fa-star-o'}}"></i>&nbsp;
                                                 </button>
                                             </td>
                                             <td class="text-capitalize">
@@ -143,7 +143,7 @@
                                         <tbody>
                                         <tr dir-paginate="r in results | filter:{chamber:'joint'} | filter:search | itemsPerPage: 10" pagination-id="committee-joint">
                                             <td>
-                                                <button class="btn btn-default" ng-click="toggleLocalStorageFavourite(r.committee_id)"><i class="fa {{r.favourite ? 'fa-star':'fa-star-o'}}"></i>&nbsp;
+                                                <button class="btn btn-default" ng-click="toggleLocalStorageFavorite(r.committee_id)"><i class="fa {{r.favorite ? 'fa-star':'fa-star-o'}}"></i>&nbsp;
                                                 </button>
                                             </td>
                                             <td class="text-capitalize">
