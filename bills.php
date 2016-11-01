@@ -38,7 +38,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr dir-paginate="b in results | filter:b.history.active | filter:search | itemsPerPage: 10" pagination-id="bills-active">
+                                        <tr dir-paginate="b in results | filter:{history:{active:true}} | filter:search | itemsPerPage: 10" pagination-id="bills-active">
                                             <td class="text-uppercase">{{b.bill_id}}</td>
                                             <td class="text-uppercase">{{b.bill_type}}</td>
                                             <td>{{b.official_title}}</td>
@@ -50,7 +50,7 @@
                                             <td>{{b.introduced_on}}</td>
                                             <td>{{b.sponsor.title+' '+b.sponsor.first_name+' '+ b.sponsor.last_name}}</td>
                                             <td>
-                                                <button type="button" class="btn btn-primary" ng-click="showBillDetails(b.bill_id)">View Details</button>
+                                                <button type="button" class="btn btn-primary" ng-click="showBillDetails(b.bill_id)" data-active="{{b.history.active}}">View Details</button>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -67,9 +67,9 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="pull-right">
-                                                <input type="text" class="form-control" name="house-search" ng-model="search" placeholder="Search">
+                                                <input type="text" class="form-control" name="bills-search" ng-model="search" placeholder="Search">
                                             </div>
-                                            <h3 class="panel-title">Legislators By House</h3>
+                                            <h3 class="panel-title">New Bills</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -77,34 +77,35 @@
                                     <table class="table  table-responsive">
                                         <thead>
                                         <tr>
-                                            <th>Party</th>
-                                            <th>Name</th>
+                                            <th>Bill ID</th>
+                                            <th>Bill Type</th>
+                                            <th>Title</th>
                                             <th>Chamber</th>
-                                            <th>State</th>
+                                            <th>Introduced On</th>
+                                            <th>Sponsor</th>
                                             <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr dir-paginate="r in results | filter:{chamber:'senate'} | filter:search | itemsPerPage: 10" pagination-id="legislators-senate">
-                                            <td>
-                                                <img ng-if="(r.party && r.party==='R')" src="images/r.png" class="img-responsive" height="20" width="20">
-                                                <img ng-if="(r.party && r.party==='D')" src="images/r.png" class="img-responsive" height="20" width="20">
-                                            </td>
-                                            <td>{{r.first_name+' '+ r.last_name}}</td>
+                                        <tr dir-paginate="b in results | filter:{history:{active:false}}  | filter:search | itemsPerPage: 10" pagination-id="bills-new">
+                                            <td class="text-uppercase">{{b.bill_id}}</td>
+                                            <td class="text-uppercase">{{b.bill_type}}</td>
+                                            <td>{{b.official_title}}</td>
                                             <td class="text-capitalize">
-                                                <img ng-if="r.chamber==='house'" src="images/h.png" height="20" width="20"/>
-                                                <img ng-if="r.chamber==='senate'" src="images/s.svg" height="20" width="20"/>
-                                                {{r.chamber}}
+                                                <img ng-if="b.chamber==='house'" src="images/h.png" height="20" width="20"/>
+                                                <img ng-if="b.chamber==='senate'" src="images/s.svg" height="20" width="20"/>
+                                                {{b.chamber}}
                                             </td>
-                                            <td>{{r.state_name}}</td>
+                                            <td>{{b.introduced_on}}</td>
+                                            <td>{{b.sponsor.title+' '+b.sponsor.first_name+' '+ b.sponsor.last_name}}</td>
                                             <td>
-                                                <button type="button" class="btn btn-primary" ng-click="showLegislatorDetails(r.bioguide_id)">View Details</button>
+                                                <button type="button" class="btn btn-primary" ng-click="showBillDetails(b.bill_id)"  data-active="{{b.history.active}}">View Details</button>
                                             </td>
                                         </tr>
                                         </tbody>
                                     </table>
                                     <div class="text-center">
-                                        <dir-pagination-controls pagination-id="legislators-senate"></dir-pagination-controls>
+                                        <dir-pagination-controls pagination-id="bills-new"></dir-pagination-controls>
                                     </div>
                                 </div>
                             </div>
