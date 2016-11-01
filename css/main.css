@@ -1,0 +1,38 @@
+html, body {
+    height: 100%;
+}
+
+hr {
+    border-color: #D9D9D9;
+}
+
+div.body {
+    height: 100%;
+    background-color: #F3F3F3;
+}
+
+div.container-fluid {
+    height: 100%;
+    padding: 0px;
+}
+
+div.side-nav {
+    height: 100%;
+    background-color: #202020;
+    padding-top: 10px;
+}
+
+ul.nav-pills > li.active > a {
+    background-color: transparent;
+}
+
+div.tab-container {
+    background-color: white;
+    padding: 10px;
+    border: 2px solid #D9D9D9;
+    border-radius: 3px;
+}
+
+button.navbar-toggle {
+    margin-left: 5px;
+}
