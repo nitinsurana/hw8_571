@@ -51,7 +51,7 @@
                                             <td>{{b.introduced_on}}</td>
                                             <td>{{b.sponsor.title+' '+b.sponsor.first_name+' '+ b.sponsor.last_name}}</td>
                                             <td>
-                                                <button type="button" class="btn btn-primary" ng-click="showBillDetails(b.bill_id)" data-active="{{b.history.active}}">View Details</button>
+                                                <a href="#/bills/{{b.bill_id}}" class="btn btn-primary">View Details</a>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -101,7 +101,7 @@
                                             <td>{{b.introduced_on}}</td>
                                             <td>{{b.sponsor.title+' '+b.sponsor.first_name+' '+ b.sponsor.last_name}}</td>
                                             <td>
-                                                <button type="button" class="btn btn-primary" ng-click="showBillDetails(b.bill_id)"  data-active="{{b.history.active}}">View Details</button>
+                                                <a href="#/bills/{{b.bill_id}}" class="btn btn-primary">View Details</a>
                                             </td>
                                         </tr>
                                         </tbody>

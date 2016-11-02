@@ -38,6 +38,10 @@ if (isset($_REQUEST['submit'])) {
             break;
         case "Bills":
             $apiUrl = "http://congress.api.sunlightfoundation.com/bills?per_page=50&apikey=" . API_KEY;
+            if (isset($_REQUEST['bill_id'])) {
+                $billId = $_REQUEST['bill_id'];
+                $apiUrl = "http://congress.api.sunlightfoundation.com/bills?bill_id=$billId&apikey=" . API_KEY;
+            }
             $pjson = callApi($apiUrl);
             break;
     }

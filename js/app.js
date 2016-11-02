@@ -1,4 +1,3 @@
-//TODO remove direct calls to API and replace with api.php proxying them
 //TODO Fix dates
 //TODO Fix menu collapse
 //TODO Ask for pagination in bills ?
@@ -15,10 +14,11 @@
 //TODO instead of creating entirely new active & new bills <table> => create a component and use it with different filters
 //TODO fix the 404s for legislators' bioguide_id.jpg
 //TODO chamber has a 3rd possible value => joint(s.svg) =>handle in all tabs for legislator, bills, committee
-//TOOD term progress bar in legislators detail view
-'use strict';
+//TODO term progress bar in legislators detail view
+//TODO Visiting the same viewDetails again for legislator/bills doesn't work - due to no route change.
 
-window.API_KEY = '682b365f52874343b644bc3d6a0149e4';
+
+'use strict';
 
 var app = angular.module('app', ['angularUtils.directives.dirPagination', 'ngRoute']);
 app.config(function ($routeProvider) {
@@ -32,6 +32,10 @@ app.config(function ($routeProvider) {
             controller: 'LegislatorController'
         })
         .when('/bills', {
+            templateUrl: 'bills.html',
+            controller: 'BillsController'
+        })
+        .when('/bills/:billId',{
             templateUrl: 'bills.html',
             controller: 'BillsController'
         })
@@ -134,18 +138,17 @@ app.controller('CommitteeJointController', function () {
 });
 
 
-app.controller('BillsController', function BillsController($scope, $http) {
+app.controller('BillsController', function BillsController($scope, $http, $routeParams) {
     $scope.results = [];
-    $http.get('api.php?submit=true&db=Bills&keyword=&chamber=&page=' + $scope.page).then(function (response) {
+    $http.get('api.php?submit=true&db=Bills').then(function (response) {
         $scope.results = response.data.results;
         $scope.itemsPerPage = 10;
     });
     $scope.showBillDetails = function (bill_id) {
-        var result = $scope.results.find(function (o) {
-            return o.bill_id === bill_id;
+        $http.get('api.php?submit=true&db=Bills&bill_id=' + bill_id).then(function (response) {
+            var b = $scope.bill = response.data.results[0];
+            $scope.bill.favorite = window.localStorage.getItem('bill-' + b.bill_id) && true;
         });
-        var b = $scope.bill = result;
-        $scope.bill.favorite = window.localStorage.getItem('bill-' + b.bill_id) && true;
         $("#carousel-bills").carousel('next');
     };
     $scope.showPrevTabCarousel = function () {
@@ -158,6 +161,9 @@ app.controller('BillsController', function BillsController($scope, $http) {
             window.localStorage.setItem('bill-' + bioguideId, JSON.stringify($scope.bill));
         }
         $scope.bill.favorite = !$scope.bill.favorite;
+    };
+    if ($routeParams.billId) {
+        $scope.showBillDetails($routeParams.billId);
     }
 });
 app.controller('BillsActiveController', function BillsActiveController($scope, $http) {
