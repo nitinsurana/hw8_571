@@ -63,6 +63,7 @@ app.directive('showTab', function () {
 
 app.controller('MainController', function MainController($scope) {
     $scope.menu = 'legislators';
+    $scope.sidenavVisible = true;
 });
 
 app.controller('FavoritesController', function ($scope) {

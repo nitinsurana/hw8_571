@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-xs-3 col-sm-2">
                 <div class="navbar-default">
-                    <button type="button" class="pull-left navbar-toggle" style="display: block;" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <button type="button" class="pull-left navbar-toggle" style="display: block;" ng-click="sidenavVisible=!sidenavVisible">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -38,7 +38,7 @@
         </div>
     </div>
     <div class="body">
-        <div class="col-md-2 col-sm-3 side-nav">
+        <div class="col-md-2 col-sm-3 side-nav" ng-show="sidenavVisible">
             <ul class="nav nav-pills nav-stacked">
                 <li ng-click="menu='legislators'" ng-class="menu=='legislators'?'active':''"><a href="#/"><i class="fa fa-user"></i>&nbsp;&nbsp;Legislators</a></li>
                 <li ng-click="menu='bills'" ng-class="menu=='bills'?'active':''"><a href="#bills"><i class="fa fa-file"></i>&nbsp;&nbsp;Bills</a></li>
@@ -46,7 +46,7 @@
                 <li ng-click="menu='favorites'" ng-class="menu=='favorites'?'active':''"><a href="#favorites"><i class="fa fa-star"></i>&nbsp;&nbsp;Favorites</a></li>
             </ul>
         </div>
-        <div ng-view></div>
+        <div class="{{sidenavVisible?'col-sm-9 col-md-10':'col-sm-12 col-md-12'}} content" ng-view></div>
     </div>
 </div>
 </body>
