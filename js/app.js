@@ -15,12 +15,42 @@
 //TODO instead of creating entirely new active & new bills <table> => create a component and use it with different filters
 //TODO fix the 404s for legislators' bioguide_id.jpg
 //TODO chamber has a 3rd possible value => joint(s.svg) =>handle in all tabs for legislator, bills, committee
-//TODO after selecting a favorite, the favorites menu doesn't load again to show the newly added favorites because the controller does not execute again
-
+//TOOD term progress bar in legislators detail view
 
 window.API_KEY = '682b365f52874343b644bc3d6a0149e4';
 
-var app = angular.module('app', ['angularUtils.directives.dirPagination']);
+var app = angular.module('app', ['angularUtils.directives.dirPagination', 'ngRoute']);
+app.config(function ($routeProvider) {
+    $routeProvider
+        .when('/', {
+            templateUrl: 'legislators.html',
+            controller: 'LegislatorController'
+        })
+        .when('/bills', {
+            templateUrl: 'bills.html',
+            controller: 'BillsController'
+        })
+        .when('/committees', {
+            templateUrl: 'committees.html',
+            controller: 'CommitteeController'
+        })
+        .when('/favorites', {
+            templateUrl: 'favorites.html',
+            controller: 'FavoritesController'
+        })
+});
+
+
+app.directive('showTab', function () {
+    return {
+        link: function (scope, element, attrs) {
+            element.click(function (e) {
+                e.preventDefault();
+                jQuery(element).tab('show');
+            });
+        }
+    };
+});
 
 app.controller('MainController', function MainController($scope) {
     $scope.menu = 'legislators';

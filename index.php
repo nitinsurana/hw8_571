@@ -14,6 +14,7 @@
     <script src="js/lib/jquery.js"></script>
     <script src="js/lib/angular.js"></script>
     <script src="js/lib/dirPagination.js"></script>
+    <script src="js/lib/angular-route.js"></script>
     <script src="js/lib/bootstrap.min.js"></script>
     <script src="js/app.js"></script>
 </head>
@@ -39,16 +40,13 @@
     <div class="body">
         <div class="col-md-2 col-sm-3 side-nav">
             <ul class="nav nav-pills nav-stacked">
-                <li ng-click="menu='legislators'" ng-class="menu=='legislators'?'active':''"><a href="#"><i class="fa fa-user"></i>&nbsp;&nbsp;Legislators</a></li>
-                <li ng-click="menu='bills'" ng-class="menu=='bills'?'active':''"><a href="#"><i class="fa fa-file"></i>&nbsp;&nbsp;Bills</a></li>
-                <li ng-click="menu='committees'" ng-class="menu=='committees'?'active':''"><a href="#"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Committees</a></li>
-                <li ng-click="menu='favorites'" ng-class="menu=='favorites'?'active':''"><a href="#"><i class="fa fa-star"></i>&nbsp;&nbsp;Favorites</a></li>
+                <li ng-click="menu='legislators'" ng-class="menu=='legislators'?'active':''"><a href="#/"><i class="fa fa-user"></i>&nbsp;&nbsp;Legislators</a></li>
+                <li ng-click="menu='bills'" ng-class="menu=='bills'?'active':''"><a href="#bills"><i class="fa fa-file"></i>&nbsp;&nbsp;Bills</a></li>
+                <li ng-click="menu='committees'" ng-class="menu=='committees'?'active':''"><a href="#committees"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Committees</a></li>
+                <li ng-click="menu='favorites'" ng-class="menu=='favorites'?'active':''"><a href="#favorites"><i class="fa fa-star"></i>&nbsp;&nbsp;Favorites</a></li>
             </ul>
         </div>
-        <?php include('legislators.php')?>
-        <?php include('bills.php')?>
-        <?php include('committees.php')?>
-        <?php include('favorites.php')?>
+        <div ng-view></div>
     </div>
 </div>
 </body>
