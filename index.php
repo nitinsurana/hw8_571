@@ -22,7 +22,7 @@
 <div class="container-fluid">
     <div class="header">
         <div class="row">
-            <div class="col-xs-3 col-sm-2">
+            <div class="col-xs-3 col-xs-2">
                 <div class="navbar-default">
                     <button type="button" class="pull-left navbar-toggle" style="display: block;" ng-click="sidenavVisible=!sidenavVisible">
                         <span class="icon-bar"></span>
@@ -31,22 +31,22 @@
                     </button>
                 </div>
             </div>
-            <div class="col-xs-9 col-sm-10 text-center">
+            <div class="col-xs-9 col-xs-10 text-center">
                 <a href="http://sunlightfoundation.com/" target="_blank" class=""><img src="images/logo.png" alt="" height="40" width="80"></a>
                 CONGRESS API
             </div>
         </div>
     </div>
     <div class="body">
-        <div class="col-md-2 col-sm-3 side-nav" ng-show="sidenavVisible">
+        <div class="col-md-2 col-xs-2 side-nav" ng-show="sidenavVisible">
             <ul class="nav nav-pills nav-stacked">
-                <li ng-click="menu='legislators'" ng-class="menu=='legislators'?'active':''"><a href="#/"><i class="fa fa-user"></i>&nbsp;&nbsp;Legislators</a></li>
-                <li ng-click="menu='bills'" ng-class="menu=='bills'?'active':''"><a href="#bills"><i class="fa fa-file"></i>&nbsp;&nbsp;Bills</a></li>
-                <li ng-click="menu='committees'" ng-class="menu=='committees'?'active':''"><a href="#committees"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Committees</a></li>
-                <li ng-click="menu='favorites'" ng-class="menu=='favorites'?'active':''"><a href="#favorites"><i class="fa fa-star"></i>&nbsp;&nbsp;Favorites</a></li>
+                <li ng-click="menu='legislators'" ng-class="menu=='legislators'?'active':''"><a href="#/"><i class="fa fa-user"></i><span class="hidden-xs">&nbsp;&nbsp;Legislators</span></a></li>
+                <li ng-click="menu='bills'" ng-class="menu=='bills'?'active':''"><a href="#bills"><i class="fa fa-file"></i><span class="hidden-xs">&nbsp;&nbsp;Bills</span></a></li>
+                <li ng-click="menu='committees'" ng-class="menu=='committees'?'active':''"><a href="#committees"><i class="fa fa-sign-out"></i><span class="hidden-xs">&nbsp;&nbsp;Committees</span></a></li>
+                <li ng-click="menu='favorites'" ng-class="menu=='favorites'?'active':''"><a href="#favorites"><i class="fa fa-star"></i><span class="hidden-xs">&nbsp;&nbsp;Favorites</span></a></li>
             </ul>
         </div>
-        <div class="{{sidenavVisible?'col-sm-9 col-md-10':'col-sm-12 col-md-12'}} content" ng-view></div>
+        <div class="{{sidenavVisible?'col-xs-10 col-md-10':'col-xs-12 col-md-12'}} content" ng-view></div>
     </div>
 </div>
 </body>
