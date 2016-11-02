@@ -16,6 +16,7 @@
 //TODO fix the 404s for legislators' bioguide_id.jpg
 //TODO chamber has a 3rd possible value => joint(s.svg) =>handle in all tabs for legislator, bills, committee
 //TOOD term progress bar in legislators detail view
+'use strict';
 
 window.API_KEY = '682b365f52874343b644bc3d6a0149e4';
 
@@ -23,6 +24,10 @@ var app = angular.module('app', ['angularUtils.directives.dirPagination', 'ngRou
 app.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
+            templateUrl: 'legislators.html',
+            controller: 'LegislatorController'
+        })
+        .when('/legislator/:bioguideId', {
             templateUrl: 'legislators.html',
             controller: 'LegislatorController'
         })
@@ -72,12 +77,6 @@ app.controller('FavoritesController', function ($scope) {
 });
 app.controller('FavoritesLegislatorController', function ($scope) {
     $scope.results = $scope.fetch('legislator-');
-    $scope.navigateToRoute = function () {
-
-    };
-    $scope.navigateToBillRoute = function () {
-
-    };
     $scope.removeFavorite = function (key, index) {
         window.localStorage.removeItem(key);
         $scope.results.splice(index, 1);
@@ -168,30 +167,18 @@ app.controller('BillsNewController', function BillsNewController($scope, $http) 
 
 });
 
-app.controller('LegislatorController', function LegislatorController($scope, $http) {
+app.controller('LegislatorController', function LegislatorController($scope, $http, $routeParams) {
     $scope.results = [];
-    $http.get('api.php?submit=true&db=Legislators&keyword=&chamber=&page=' + $scope.page).then(function (response) {
-        $scope.results = response.data.results;
-        $scope.itemsPerPage = 10;
-    });
 
     $scope.showLegislatorDetails = function (bioguideId) {
-        var result = $scope.results.find(function (o) {
-            return (o.bioguide_id === bioguideId);
+        $http.get('api.php?submit=true&db=Legislators&bioguide_id=' + bioguideId).then(function (response) {
+            var result = response.data.legislator.results[0];
+            $scope.legislator = result;
+            $scope.legislator.favorite = window.localStorage.getItem('legislator-' + result.bioguide_id) && true;
+            $scope.legislator.committees = response.data.committees.results;
+            $scope.legislator.bills = response.data.bills.results;
         });
-        var l = $scope.legislator = result;
-        $scope.legislator.favorite = window.localStorage.getItem('legislator-' + l.bioguide_id) && true;
         $("#carousel-legislators").carousel('next');
-        $http.get('http://congress.api.sunlightfoundation.com/committees?per_page=5&member_ids=' + bioguideId + '&apikey=' + window.API_KEY).then(function (response) {
-            if (response.data.results && response.data.results.length > 0) {
-                $scope.legislator.committees = response.data.results;
-            }
-        });
-        $http.get('http://congress.api.sunlightfoundation.com/bills?per_page=5&sponsor_id=' + bioguideId + '&apikey=' + window.API_KEY).then(function (response) {
-            if (response.data.results && response.data.results.length > 0) {
-                $scope.legislator.bills = response.data.results;
-            }
-        });
     };
 
     $scope.showPrevTabCarousel = function () {
@@ -205,7 +192,17 @@ app.controller('LegislatorController', function LegislatorController($scope, $ht
             window.localStorage.setItem('legislator-' + bioguideId, JSON.stringify($scope.legislator));
         }
         $scope.legislator.favorite = !$scope.legislator.favorite;
+    };
+
+    if ($routeParams.bioguideId) {
+        $scope.showLegislatorDetails($routeParams.bioguideId);
     }
+    // else {
+    $http.get('api.php?submit=true&db=Legislators&keyword=&chamber=&page=' + $scope.page).then(function (response) {
+        $scope.results = response.data.results;
+        $scope.itemsPerPage = 10;
+    });
+    // }
 });
 
 app.controller('LegislatorStateController', function LegislatorStateController($scope, $http) {
