@@ -23,19 +23,18 @@
 var app = angular.module('app', ['angularUtils.directives.dirPagination', 'ngRoute']);
 app.config(function ($routeProvider) {
     $routeProvider
-        .when('/', {
+        .when('/legislator', {
             templateUrl: 'legislators.html',
-            controller: 'LegislatorController'
-        })
-        .when('/legislator/:bioguideId', {
-            templateUrl: 'legislators.html',
-            controller: 'LegislatorController'
+            controller: 'LegislatorController',
+            reloadOnSearch: false
+
         })
         .when('/bills', {
             templateUrl: 'bills.html',
-            controller: 'BillsController'
+            controller: 'BillsController',
+            reloadOnSearch: false
         })
-        .when('/bills/:billId',{
+        .when('/bills/:billId', {
             templateUrl: 'bills.html',
             controller: 'BillsController'
         })
@@ -47,6 +46,7 @@ app.config(function ($routeProvider) {
             templateUrl: 'favorites.html',
             controller: 'FavoritesController'
         })
+        .otherwise({redirectTo: '/legislator'});
 });
 
 
@@ -139,7 +139,7 @@ app.controller('CommitteeJointController', function () {
 });
 
 
-app.controller('BillsController', function BillsController($scope, $http, $routeParams) {
+app.controller('BillsController', function BillsController($scope, $http, $location) {
     $scope.results = [];
     $http.get('api.php?submit=true&db=Bills').then(function (response) {
         $scope.results = response.data.results;
@@ -151,9 +151,11 @@ app.controller('BillsController', function BillsController($scope, $http, $route
             $scope.bill.favorite = window.localStorage.getItem('bill-' + b.bill_id) && true;
         });
         $("#carousel-bills").carousel('next');
+        window.location.hash = '/bills?bill_id=' + bill_id;
     };
     $scope.showPrevTabCarousel = function () {
         $("#carousel-bills").carousel('prev');
+        window.location.hash = '/bills';
     };
     $scope.toggleLocalStorageFavorite = function (bioguideId) {
         if (window.localStorage.getItem('bill-' + bioguideId)) {
@@ -163,8 +165,8 @@ app.controller('BillsController', function BillsController($scope, $http, $route
         }
         $scope.bill.favorite = !$scope.bill.favorite;
     };
-    if ($routeParams.billId) {
-        $scope.showBillDetails($routeParams.billId);
+    if ($location.search()['bill_id']) {
+        $scope.showBillDetails($location.search()['bill_id']);
     }
 });
 app.controller('BillsActiveController', function BillsActiveController($scope, $http) {
@@ -174,7 +176,7 @@ app.controller('BillsNewController', function BillsNewController($scope, $http) 
 
 });
 
-app.controller('LegislatorController', function LegislatorController($scope, $http, $routeParams) {
+app.controller('LegislatorController', function LegislatorController($location, $scope, $http) {
     $scope.results = [];
 
     $scope.showLegislatorDetails = function (bioguideId) {
@@ -185,11 +187,14 @@ app.controller('LegislatorController', function LegislatorController($scope, $ht
             $scope.legislator.committees = response.data.committees.results;
             $scope.legislator.bills = response.data.bills.results;
         });
+        window.location.hash = '/legislator?bioguide_id=' + bioguideId;
         $("#carousel-legislators").carousel('next');
     };
 
     $scope.showPrevTabCarousel = function () {
         $("#carousel-legislators").carousel('prev');
+        //Change route silently
+        window.location.hash = '/legislator';
     };
 
     $scope.toggleLocalStorageFavorite = function (bioguideId) {
@@ -201,15 +206,15 @@ app.controller('LegislatorController', function LegislatorController($scope, $ht
         $scope.legislator.favorite = !$scope.legislator.favorite;
     };
 
-    if ($routeParams.bioguideId) {
-        $scope.showLegislatorDetails($routeParams.bioguideId);
+
+    if ($location.search()['bioguide_id']) {
+        var bioguideId = $location.search()['bioguide_id'];
+        $scope.showLegislatorDetails(bioguideId);
     }
-    // else {
     $http.get('api.php?submit=true&db=Legislators&keyword=&chamber=&page=' + $scope.page).then(function (response) {
         $scope.results = response.data.results;
         $scope.itemsPerPage = 10;
     });
-    // }
 });
 
 app.controller('LegislatorStateController', function LegislatorStateController($scope, $http) {

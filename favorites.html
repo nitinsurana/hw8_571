@@ -58,7 +58,7 @@
                                             <a href="mailto:{{r.oc_email}}">{{r.oc_email}}</a>
                                         </td>
                                         <td>
-                                            <a href="#/legislator/{{r.bioguide_id}}" class="btn btn-primary">View Details</a>
+                                            <a href="#/legislator?bioguide_id={{r.bioguide_id}}" class="btn btn-primary">View Details</a>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -109,7 +109,7 @@
                                         <td>{{r.introduced_on}}</td>
                                         <td>{{r.sponsor.title+', '+r.sponsor.last_name+', '+r.sponsor.last_name}}</td>
                                         <td>
-                                            <a href="#/bills/{{r.bill_id}}" class="btn btn-primary">View Details</a>
+                                            <a href="#/bills?bill_id={{r.bill_id}}" class="btn btn-primary">View Details</a>
                                         </td>
                                     </tr>
                                     </tbody>
