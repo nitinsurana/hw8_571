@@ -18,7 +18,7 @@
 var app = angular.module('app', ['angularUtils.directives.dirPagination', 'ngRoute']);
 app.config(function ($routeProvider) {
     $routeProvider
-        .when('/legislator', {
+        .when('/legislators', {
             templateUrl: 'legislators.html',
             controller: 'LegislatorController',
             reloadOnSearch: false
@@ -41,7 +41,7 @@ app.config(function ($routeProvider) {
             templateUrl: 'favorites.html',
             controller: 'FavoritesController'
         })
-        .otherwise({redirectTo: '/legislator'});
+        .otherwise({redirectTo: '/legislators'});
 });
 
 
@@ -56,8 +56,8 @@ app.directive('showTab', function () {
     };
 });
 
-app.controller('MainController', function MainController($scope) {
-    $scope.menu = 'legislators';
+app.controller('MainController', function MainController($scope, $location) {
+    $scope.menu = $location.path().replace('/', '');
     $scope.sidenavVisible = true;
     $scope.changeMenu = function (m) {
         $scope.menu = m;
@@ -185,14 +185,14 @@ app.controller('LegislatorController', function LegislatorController($location, 
             $scope.legislator.committees = response.data.committees.results;
             $scope.legislator.bills = response.data.bills.results;
         });
-        window.location.hash = '/legislator?bioguide_id=' + bioguideId;
+        window.location.hash = '/legislators?bioguide_id=' + bioguideId;
         $("#carousel-legislators").carousel('next');
     };
 
     $scope.showPrevTabCarousel = function () {
         $("#carousel-legislators").carousel('prev');
         //Change route silently
-        window.location.hash = '/legislator';
+        window.location.hash = '/legislators';
     };
 
     $scope.toggleLocalStorageFavorite = function (bioguideId) {

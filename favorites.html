@@ -40,7 +40,7 @@
                                             <button class="btn btn-default" ng-click="removeFavorite('legislator-'+r.bioguide_id, $index)"><i class="fa fa-trash"></i>&nbsp;</button>
                                         </td>
                                         <td>
-                                            <img height="20" ng-if="r && r.bioguide_id" src="https://theunitedstates.io/images/congress/original/{{r.bioguide_id}}.jpg">
+                                            <img height="20" ng-if="r && r.bioguide_id" ng-src="https://theunitedstates.io/images/congress/original/{{r.bioguide_id}}.jpg">
                                         </td>
                                         <td>
                                             <img ng-if="(r.party && r.party==='R')" src="images/r.png" class="img-responsive" height="20" width="20">
@@ -58,7 +58,7 @@
                                             <a href="mailto:{{r.oc_email}}">{{r.oc_email}}</a>
                                         </td>
                                         <td>
-                                            <a href="#/legislator?bioguide_id={{r.bioguide_id}}" class="btn btn-primary" ng-click="changeMenu('legislators')">View Details</a>
+                                            <a href="#/legislators?bioguide_id={{r.bioguide_id}}" class="btn btn-primary" ng-click="changeMenu('legislators')">View Details</a>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -182,7 +182,7 @@
                         <tbody>
                         <tr>
                             <td rowspan="6" class="text-center">
-                                <img height="200" ng-if="legislator && legislator.bioguide_id" src="https://theunitedstates.io/images/congress/original/{{legislator.bioguide_id}}.jpg">
+                                <img height="200" ng-if="legislator && legislator.bioguide_id" ng-src="https://theunitedstates.io/images/congress/original/{{legislator.bioguide_id}}.jpg">
                             </td>
                         </tr>
                         <tr>
