@@ -1,21 +1,16 @@
 //TODO Fix dates
-//TODO Fix menu collapse
 //TODO Ask for pagination in bills ?
 //TODO Maybe split the legislators table in a separate angularjs component & template in .html file
 //TODO Report - ActiveBills tab is missing title in the table's description but it shows up in the pdf screenshot
 //TODO show loader while any table is loading for e.g. legislator
 //TODO show "no data found" message in legislator_details when no data found
-//TODO Combine all .php files into 2 files - index.php & api.php
 //TODO row heading bold e.g. (Bill ID : abcd) or (State : New Jersey)
-//TODO sort the states dropdown/select in legislators screen
-//TODO Menu toggle on click
 //TODO Mobile screen responsiveness (check the video)
 //TODO deploy on AWS for 571
 //TODO instead of creating entirely new active & new bills <table> => create a component and use it with different filters
 //TODO fix the 404s for legislators' bioguide_id.jpg
 //TODO chamber has a 3rd possible value => joint(s.svg) =>handle in all tabs for legislator, bills, committee
 //TODO term progress bar in legislators detail view
-//TODO Visiting the same viewDetails again for legislator/bills doesn't work - due to no route change.
 
 
 'use strict';
@@ -64,6 +59,9 @@ app.directive('showTab', function () {
 app.controller('MainController', function MainController($scope) {
     $scope.menu = 'legislators';
     $scope.sidenavVisible = true;
+    $scope.changeMenu = function (m) {
+        $scope.menu = m;
+    };
 });
 
 app.controller('FavoritesController', function ($scope) {
@@ -219,7 +217,7 @@ app.controller('LegislatorController', function LegislatorController($location, 
 
 app.controller('LegislatorStateController', function LegislatorStateController($scope, $http) {
     var self = this;
-    $scope.states = ["Alabama", "Montana", "Alaska", "Nebraska", "Arizona", "Arkansas", "Colorado", "Nevada", "New Hampshire", "California", "New Jersey", "New Mexico", "Connecticut", "New York", "Delaware", "North Carolina", "District Of Columbia", "North Dakota", "Florida", "Ohio", "Georgia", "Oklahoma", "Hawaii", "Oregon", "Idaho", "Pennsylvania", "Illinois", "Rhode Island", "Indiana", "South Carolina", "Iowa", "South Dakota", "Kansas", "Tennessee", "Kentucky", "Texas", "Louisiana", "Utah", "Maine", "Vermont", "Maryland", "Virginia", "Massachusetts", "Washington", "Michigan", "West Virginia", "Minnesota", "Wisconsin", "Mississippi", "Wyoming", "Missouri"];
+    $scope.states = ["Alabama", "Montana", "Alaska", "Nebraska", "Arizona", "Arkansas", "Colorado", "Nevada", "New Hampshire", "California", "New Jersey", "New Mexico", "Connecticut", "New York", "Delaware", "North Carolina", "District Of Columbia", "North Dakota", "Florida", "Ohio", "Georgia", "Oklahoma", "Hawaii", "Oregon", "Idaho", "Pennsylvania", "Illinois", "Rhode Island", "Indiana", "South Carolina", "Iowa", "South Dakota", "Kansas", "Tennessee", "Kentucky", "Texas", "Louisiana", "Utah", "Maine", "Vermont", "Maryland", "Virginia", "Massachusetts", "Washington", "Michigan", "West Virginia", "Minnesota", "Wisconsin", "Mississippi", "Wyoming", "Missouri"].sort();
 });
 
 app.controller('LegislatorHouseController', function LegislatorHouseController($scope, $http) {
