@@ -10,12 +10,15 @@
     <link rel="stylesheet" href="css/font-awesome.css">
     <link href="css/main.css" rel="stylesheet">
 
-
     <script src="js/lib/jquery.js"></script>
     <script src="js/lib/angular.js"></script>
     <script src="js/lib/dirPagination.js"></script>
     <script src="js/lib/angular-route.js"></script>
+    <script src="js/lib/angular-animate.js"></script>
+    <script src="js/lib/angular-touch.js"></script>
+
     <script src="js/lib/bootstrap.min.js"></script>
+    <script src="js/lib/moment.js"></script>
     <script src="js/app.js"></script>
 </head>
 <body ng-controller="MainController">
@@ -42,7 +45,8 @@
             <ul class="nav nav-pills nav-stacked">
                 <li ng-click="menu='legislators'" ng-class="menu=='legislators'?'active':''"><a href="#/"><i class="fa fa-user"></i><span class="hidden-xs">&nbsp;&nbsp;Legislators</span></a></li>
                 <li ng-click="menu='bills'" ng-class="menu=='bills'?'active':''"><a href="#bills"><i class="fa fa-file"></i><span class="hidden-xs">&nbsp;&nbsp;Bills</span></a></li>
-                <li ng-click="menu='committees'" ng-class="menu=='committees'?'active':''"><a href="#committees"><i class="fa fa-sign-out"></i><span class="hidden-xs">&nbsp;&nbsp;Committees</span></a></li>
+                <li ng-click="menu='committees'" ng-class="menu=='committees'?'active':''"><a href="#committees"><i class="fa fa-sign-out"></i><span class="hidden-xs">&nbsp;&nbsp;Committees</span></a>
+                </li>
                 <li ng-click="menu='favorites'" ng-class="menu=='favorites'?'active':''"><a href="#favorites"><i class="fa fa-star"></i><span class="hidden-xs">&nbsp;&nbsp;Favorites</span></a></li>
             </ul>
         </div>

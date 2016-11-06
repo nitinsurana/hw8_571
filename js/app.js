@@ -8,10 +8,11 @@
 //TODO Mobile screen responsiveness (check the video)
 //TODO deploy on AWS for 571
 //TODO instead of creating entirely new active & new bills <table> => create a component and use it with different filters
-//TODO fix the 404s for legislators' bioguide_id.jpg
 //TODO chamber has a 3rd possible value => joint(s.svg) =>handle in all tabs for legislator, bills, committee
 //TODO term progress bar in legislators detail view
-
+//TODO query 50 active & non-active bills using the API - Make both calls in a single http api call.
+//TODO sorting the legislators, bills & committees
+//TODO Conform to the additional requirements mentioned here - https://piazza.com/class/iq15q6i9gsk1xg?cid=621
 
 'use strict';
 
@@ -22,7 +23,6 @@ app.config(function ($routeProvider) {
             templateUrl: 'legislators.html',
             controller: 'LegislatorController',
             reloadOnSearch: false
-
         })
         .when('/bills', {
             templateUrl: 'bills.html',
@@ -57,10 +57,21 @@ app.directive('showTab', function () {
 });
 
 app.controller('MainController', function MainController($scope, $location) {
-    $scope.menu = $location.path().replace('/', '');
+    $scope.menu = $location.path().replace('/', '') || 'legislators';
     $scope.sidenavVisible = true;
     $scope.changeMenu = function (m) {
         $scope.menu = m;
+    };
+    $scope.formatDate = function (v) {
+        return moment(v).format('MM-DD-YYYY');
+    };
+    $scope.termProgress = function (start_date, end_date) {
+        if (!start_date || !end_date) {
+            return '';
+        }
+        var m = (moment() - moment(start_date)) / (moment(end_date) - moment(start_date)) * 100;
+        return Math.round(m);
+        // (now -start) / (end -start) * 100
     };
 });
 

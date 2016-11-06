@@ -39,7 +39,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr dir-paginate="r in results | filter:(!!stateFilter || undefined) && {state_name: stateFilter} | itemsPerPage: 10" pagination-id="legislators-state">
+                                    <tr dir-paginate="r in results | filter:(!!stateFilter || undefined) && {state_name: stateFilter} | orderBy:['state_name','last_name'] | itemsPerPage: 10" pagination-id="legislators-state">
                                         <td>
                                             <img ng-if="(r.party && r.party==='R')" src="images/r.png" class="img-responsive" height="20" width="20">
                                             <img ng-if="(r.party && r.party==='D')" src="images/r.png" class="img-responsive" height="20" width="20">
@@ -90,7 +90,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr dir-paginate="r in results | filter:{chamber:'house'} | filter:search | itemsPerPage: 10" pagination-id="legislators-house">
+                                    <tr dir-paginate="r in results | filter:{chamber:'house'} | filter:search | orderBy:['last_name'] | itemsPerPage: 10" pagination-id="legislators-house">
                                         <td>
                                             <img ng-if="(r.party && r.party==='R')" src="images/r.png" class="img-responsive" height="20" width="20">
                                             <img ng-if="(r.party && r.party==='D')" src="images/r.png" class="img-responsive" height="20" width="20">
@@ -140,7 +140,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr dir-paginate="r in results | filter:{chamber:'senate'} | filter:search | itemsPerPage: 10" pagination-id="legislators-senate">
+                                    <tr dir-paginate="r in results | filter:{chamber:'senate'} | filter:search | orderBy:['last_name'] | itemsPerPage: 10" pagination-id="legislators-senate">
                                         <td>
                                             <img ng-if="(r.party && r.party==='R')" src="images/r.png" class="img-responsive" height="20" width="20">
                                             <img ng-if="(r.party && r.party==='D')" src="images/r.png" class="img-responsive" height="20" width="20">
@@ -215,15 +215,21 @@
                         </tr>
                         <tr>
                             <td>Start Term</td>
-                            <td>{{legislator.term_start}}</td> <!-- todo format date using moment.js -->
+                            <td>{{legislator.term_start ? formatDate(legislator.term_start) : ''}}</td>
                         </tr>
                         <tr>
                             <td>End Term</td>
-                            <td>{{legislator.term_end}}</td><!-- todo format date using moment.js -->
+                            <td>{{legislator.term_end ? formatDate(legislator.term_end) : ''}}</td>
                         </tr>
                         <tr>
                             <td>Term</td>
-                            <td><!-- TODO show a progress bar --></td>
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: {{termProgress(legislator.term_start, legislator.term_end)}}%;">
+                                        {{termProgress(legislator.term_start, legislator.term_end)}}%
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td>Office</td>
