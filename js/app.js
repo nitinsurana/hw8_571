@@ -1,13 +1,10 @@
-//TODO Fix dates
 //TODO Maybe split the legislators table in a separate angularjs component & template in .html file
 //TODO Report - ActiveBills tab is missing title in the table's description but it shows up in the pdf screenshot
 //TODO show loader while any table is loading for e.g. legislator
 //TODO show "no data found" message in legislator_details when no data found
-//TODO row heading bold e.g. (Bill ID : abcd) or (State : New Jersey)
 //TODO Mobile screen responsiveness (check the video)
 //TODO deploy on AWS for 571
 //TODO instead of creating entirely new active & new bills <table> => create a component and use it with different filters
-//TODO chamber has a 3rd possible value => joint(s.svg) =>handle in all tabs for legislator, bills, committee
 //TODO Conform to the additional requirements mentioned here - https://piazza.com/class/iq15q6i9gsk1xg?cid=621
 
 'use strict';
