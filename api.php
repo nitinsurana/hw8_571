@@ -37,12 +37,21 @@ if (isset($_REQUEST['submit'])) {
             $pjson = callApi($apiUrl);
             break;
         case "Bills":
-            $apiUrl = "http://congress.api.sunlightfoundation.com/bills?per_page=50&apikey=" . API_KEY;
             if (isset($_REQUEST['bill_id'])) {
                 $billId = $_REQUEST['bill_id'];
                 $apiUrl = "http://congress.api.sunlightfoundation.com/bills?bill_id=$billId&apikey=" . API_KEY;
+                $pjson = callApi($apiUrl);
+            } else {
+                $apiUrl = "http://congress.api.sunlightfoundation.com/bills?per_page=50&history.active=true&apikey=" . API_KEY;
+                $activeJson = callApi($apiUrl);
+
+                $apiUrl = "http://congress.api.sunlightfoundation.com/bills?per_page=50&history.active=false&apikey=" . API_KEY;
+                $newJson = callApi($apiUrl);
+                $obj = array();
+                $obj['active'] = json_decode($activeJson);
+                $obj['new'] = json_decode($newJson);
+                $pjson = json_encode($obj);
             }
-            $pjson = callApi($apiUrl);
             break;
     }
     header('Content-type: application/json; charset=UTF-8');

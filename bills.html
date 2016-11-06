@@ -48,7 +48,7 @@
                                             {{b.chamber}}
                                         </td>
                                         <td>{{b.introduced_on}}</td>
-                                        <td>{{b.sponsor.title+' '+b.sponsor.first_name+' '+ b.sponsor.last_name}}</td>
+                                        <td>{{b.sponsor.title+'. '+b.sponsor.last_name+', '+ b.sponsor.first_name}}</td>
                                         <td>
                                             <button type="button" class="btn btn-primary" ng-click="showBillDetails(b.bill_id)">View Details</button>
                                         </td>
@@ -98,7 +98,7 @@
                                             {{b.chamber}}
                                         </td>
                                         <td>{{b.introduced_on}}</td>
-                                        <td>{{b.sponsor.title+' '+b.sponsor.first_name+' '+ b.sponsor.last_name}}</td>
+                                        <td>{{b.sponsor.title+'. '+b.sponsor.last_name+', '+ b.sponsor.first_name}}</td>
                                         <td>
                                             <button type="button" class="btn btn-primary" ng-click="showBillDetails(b.bill_id)">View Details</button>
                                         </td>
@@ -146,7 +146,7 @@
                         </tr>
                         <tr>
                             <td>Sponsor</td>
-                            <td>{{bill.sponsor.title+' '+bill.sponsor.first_name+' '+bill.sponsor.last_name}}</td>
+                            <td>{{bill.sponsor.title+'. '+bill.sponsor.last_name+', '+ bill.sponsor.first_name}}</td>
                         </tr>
                         <tr>
                             <td>Chamber</td>
@@ -158,7 +158,7 @@
                         </tr>
                         <tr>
                             <td>Introduced On</td>
-                            <td>{{bill.introduced_on}}</td>
+                            <td>{{bill.introduced_on && formatDate(bill.introduced_on)}}</td>
                         </tr>
                         <tr>
                             <td>Congress URL</td>

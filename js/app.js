@@ -1,5 +1,4 @@
 //TODO Fix dates
-//TODO Ask for pagination in bills ?
 //TODO Maybe split the legislators table in a separate angularjs component & template in .html file
 //TODO Report - ActiveBills tab is missing title in the table's description but it shows up in the pdf screenshot
 //TODO show loader while any table is loading for e.g. legislator
@@ -9,9 +8,6 @@
 //TODO deploy on AWS for 571
 //TODO instead of creating entirely new active & new bills <table> => create a component and use it with different filters
 //TODO chamber has a 3rd possible value => joint(s.svg) =>handle in all tabs for legislator, bills, committee
-//TODO term progress bar in legislators detail view
-//TODO query 50 active & non-active bills using the API - Make both calls in a single http api call.
-//TODO sorting the legislators, bills & committees
 //TODO Conform to the additional requirements mentioned here - https://piazza.com/class/iq15q6i9gsk1xg?cid=621
 
 'use strict';
@@ -150,8 +146,12 @@ app.controller('CommitteeJointController', function () {
 
 app.controller('BillsController', function BillsController($scope, $http, $location) {
     $scope.results = [];
+    $scope.formatDate = function (v) {
+        return moment(v).format('MMM DD, YYYY');
+    };
     $http.get('api.php?submit=true&db=Bills').then(function (response) {
-        $scope.results = response.data.results;
+        var arr = response.data.active.results;
+        $scope.results = arr.concat(response.data.new.results);
         $scope.itemsPerPage = 10;
     });
     $scope.showBillDetails = function (bill_id) {
