@@ -39,7 +39,8 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr dir-paginate="r in results | filter:(!!stateFilter || undefined) && {state_name: stateFilter} | orderBy:['state_name','last_name'] | itemsPerPage: 10" pagination-id="legislators-state">
+                                    <tr dir-paginate="r in results | filter:(!!stateFilter || undefined) && {state_name: stateFilter} | orderBy:['state_name','last_name'] | itemsPerPage: 10"
+                                        pagination-id="legislators-state">
                                         <td>
                                             <img ng-if="(r.party && r.party==='R')" src="images/r.png" class="img-responsive" height="20" width="20">
                                             <img ng-if="(r.party && r.party==='D')" src="images/r.png" class="img-responsive" height="20" width="20">
@@ -51,7 +52,7 @@
                                             <img ng-if="r.chamber==='joint'" src="images/s.svg" height="20" width="20"/>
                                             {{r.chamber}}
                                         </td>
-                                        <td class="text-capitalize">{{r.district? ('District '+r.district) : 'N/A'}}</td>
+                                        <td class="text-capitalize">{{r.district? ('District '+r.district) : 'N.A.'}}</td>
                                         <td>{{r.state_name}}</td>
                                         <td>
                                             <button type="button" class="btn btn-primary" ng-click="showLegislatorDetails(r.bioguide_id)">View Details</button>
@@ -168,8 +169,8 @@
                 </div>
             </div>
         </div>
-        <div class="item">
-            <div class="row">
+        <div class="item p-t-0">
+            <div class="row details-header">
                 <div class="col-sm-12">
                     <h2>
                         <button class="btn btn-default" ng-click="showPrevTabCarousel()"><i class="fa fa-chevron-left"></i>&nbsp;</button>
@@ -181,8 +182,7 @@
                     </h2>
                 </div>
             </div>
-            <hr>
-            <div class="row">
+            <div class="row details-content">
                 <div class="col-md-6">
                     <table class="table table-responsive">
                         <tbody>
@@ -192,7 +192,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>{{legislator.title +' '+legislator.first_name + ' '+legislator.last_name}}</td>
+                            <td>{{legislator.title +'. '+legislator.last_name + ', '+legislator.first_name}}</td>
                         </tr>
                         <tr>
                             <td>
@@ -200,12 +200,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                Chamber : {{legislator.chamber}}
+                            <td class="text-capitalize">
+                                Chamber: {{legislator.chamber}}
                             </td>
                         </tr>
                         <tr>
-                            <td>Contact :{{legislator.phone}}</td>
+                            <td>Contact: <a href="tel:{{legislator.phone}}">{{legislator.phone}}</a></td>
                         </tr>
                         <tr>
                             <td>
@@ -225,7 +225,7 @@
                             <td>Term</td>
                             <td>
                                 <div class="progress">
-                                    <div class="progress-bar" role="progressbar" style="width: {{termProgress(legislator.term_start, legislator.term_end)}}%;">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" style="width: {{termProgress(legislator.term_start, legislator.term_end)}}%;">
                                         {{termProgress(legislator.term_start, legislator.term_end)}}%
                                     </div>
                                 </div>
@@ -237,15 +237,17 @@
                         </tr>
                         <tr>
                             <td>State</td>
-                            <td>{{legislator.state}}</td>
+                            <td>{{legislator.state_name}}</td>
                         </tr>
                         <tr>
                             <td>Fax</td>
-                            <td>{{legislator.fax}}</td>
+                            <td>
+                                <a href="fax:{{legislator.fax}}">{{legislator.fax}}</a>
+                            </td>
                         </tr>
                         <tr>
                             <td>Birthday</td>
-                            <td>{{legislator.birthday}}</td>
+                            <td>{{formatDate(legislator.birthday)}}</td>
                         </tr>
                         <tr>
                             <td>Social Links</td>
@@ -259,7 +261,7 @@
                     </table>
                 </div>
                 <div class="col-md-6">
-                    <h3>Committees</h3>
+                    <h2 class="no-margin"><small>Committees</small></h2>
                     <table class="table table-responsiveness">
                         <thead>
                         <tr>
@@ -283,7 +285,7 @@
                         </tbody>
                     </table>
 
-                    <h3>Bills</h3>
+                    <h2 class="no-margin"><small>Bills</small></h2>
                     <table class="table table-responsive">
                         <thead>
                         <tr>

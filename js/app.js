@@ -59,7 +59,7 @@ app.controller('MainController', function MainController($scope, $location) {
         $scope.menu = m;
     };
     $scope.formatDate = function (v) {
-        return moment(v).format('MM-DD-YYYY');
+        return moment(v).format('MMM DD, YYYY');
     };
     $scope.termProgress = function (start_date, end_date) {
         if (!start_date || !end_date) {
@@ -146,9 +146,6 @@ app.controller('CommitteeJointController', function () {
 
 app.controller('BillsController', function BillsController($scope, $http, $location) {
     $scope.results = [];
-    $scope.formatDate = function (v) {
-        return moment(v).format('MMM DD, YYYY');
-    };
     $http.get('api.php?submit=true&db=Bills').then(function (response) {
         var arr = response.data.active.results;
         $scope.results = arr.concat(response.data.new.results);

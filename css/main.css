@@ -41,3 +41,31 @@ div.carousel .item {
 button.navbar-toggle {
     margin-left: 5px;
 }
+
+.details-header {
+    border-bottom: 1px solid #D9D9D9;
+}
+
+.details-content {
+    padding-top: 5px;
+}
+
+#carousel-bills .details-content td:nth-child(1) {
+    font-weight: bold;
+}
+
+#carousel-legislators .details-content td:nth-last-child(2):first-child {
+    font-weight: bold;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.p-t-0 {
+    padding-top: 0px !important;
+}
