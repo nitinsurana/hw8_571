@@ -169,7 +169,7 @@
                         </tr>
                         <tr>
                             <td>Congress URL</td>
-                            <td><a href="{{bill.urls.congress}}">URL</a></td>
+                            <td><a href="{{bill.urls.congress}}" target="_blank">URL</a></td>
                         </tr>
                         <tr>
                             <td>Version Status</td>
@@ -177,12 +177,12 @@
                         </tr>
                         <tr>
                             <td>Bill URL</td>
-                            <td><a ng-if="bill.last_version.urls && bill.last_version.urls.pdf" href="{{bill.last_version.urls.pdf}}">URL</a></td>
+                            <td><a ng-if="bill.last_version.urls && bill.last_version.urls.pdf" href="{{bill.last_version.urls.pdf}}" target="_blank">URL</a></td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 hidden-xs">
                     <object data="{{bill.last_version.urls.pdf}}" type="application/pdf">
                     </object>
                 </div>

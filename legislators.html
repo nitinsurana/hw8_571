@@ -110,7 +110,7 @@
                                                 <img ng-if="r.chamber==='joint'" src="images/s.svg" height="20" width="20"/>
                                                 {{r.chamber}}
                                             </td>
-                                            <td class="text-capitalize">{{r.district? ('District '+r.district) : 'N/A'}}</td>
+                                            <td class="text-capitalize">{{r.district? ('District '+r.district) : 'N.A.'}}</td>
                                             <td>{{r.state_name}}</td>
                                             <td>
                                                 <button type="button" class="btn btn-primary" ng-click="showLegislatorDetails(r.bioguide_id)">View Details</button>
@@ -341,7 +341,7 @@
                             <td class="hidden-xs">{{b.bill_type}}</td>
                             <td class="hidden-xs">{{b.congress}}</td>
                             <td>
-                                <a ng-if="b.last_version && b.last_version.urls && b.last_version.urls.pdf" href="{{b.last_version && b.last_version.urls && b.last_version.urls.pdf}}">Link</a>
+                                <a ng-if="b.last_version && b.last_version.urls && b.last_version.urls.pdf" href="{{b.last_version && b.last_version.urls && b.last_version.urls.pdf}}" target="_blank">Link</a>
                             </td>
                         </tr>
                         </tbody>
