@@ -40,7 +40,7 @@
             </div>
         </div>
     </div>
-    <div class="body">
+    <div class="body row">
         <div class="col-md-2 col-xs-2 side-nav" ng-show="sidenavVisible">
             <ul class="nav nav-pills nav-stacked">
                 <li ng-click="menu='legislators'" ng-class="menu=='legislators'?'active':''"><a href="#/"><i class="fa fa-user"></i><span class="hidden-xs">&nbsp;&nbsp;Legislators</span></a></li>

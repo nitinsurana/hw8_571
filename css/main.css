@@ -40,6 +40,7 @@ div.carousel .item {
 
 button.navbar-toggle {
     margin-left: 5px;
+    border: none;
 }
 
 .details-header {
@@ -78,4 +79,8 @@ button.navbar-toggle {
 
 .p-t-0 {
     padding-top: 0px !important;
+}
+
+.table-responsive {
+    border: none !important;
 }

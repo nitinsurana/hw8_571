@@ -1,5 +1,4 @@
 //TODO Maybe split the legislators table in a separate angularjs component & template in .html file
-//TODO Report - ActiveBills tab is missing title in the table's description but it shows up in the pdf screenshot
 //TODO show loader while any table is loading for e.g. legislator
 //TODO show "no data found" message in legislator_details when no data found
 //TODO Mobile screen responsiveness (check the video)

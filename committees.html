@@ -25,38 +25,40 @@
                                 </div>
                             </div>
                             <div class="panel-body">
-                                <table class="table  table-responsive">
-                                    <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>Chamber</th>
-                                        <th>Committee ID</th>
-                                        <th>Name</th>
-                                        <th>Parent Committee</th>
-                                        <th>Contact</th>
-                                        <th>Office</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr dir-paginate="r in results | filter:{chamber:'house'} |filter:search | orderBy:['committee_id'] | itemsPerPage: 10" pagination-id="committee-house">
-                                        <td>
-                                            <button class="btn btn-default" ng-click="toggleLocalStorageFavorite(r.committee_id)"><i class="fa {{r.favorite ? 'fa-star':'fa-star-o'}}"></i>&nbsp;
-                                            </button>
-                                        </td>
-                                        <td class="text-capitalize">
-                                            <img ng-if="r.chamber==='house'" src="images/h.png" height="20" width="20"/>
-                                            <img ng-if="r.chamber==='senate'" src="images/s.svg" height="20" width="20"/>
-                                            <img ng-if="r.chamber==='joint'" src="images/s.svg" height="20" width="20"/>
-                                            {{r.chamber}}
-                                        </td>
-                                        <td>{{r.committee_id}}</td>
-                                        <td>{{r.name}}</td>
-                                        <td>{{r.parent_committee_id}}</td>
-                                        <td>{{r.phone}}</td>
-                                        <td>{{r.office?r.office:'N.A.'}}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Chamber</th>
+                                            <th>Committee ID</th>
+                                            <th>Name</th>
+                                            <th>Parent Committee</th>
+                                            <th>Contact</th>
+                                            <th>Office</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr dir-paginate="r in results | filter:{chamber:'house'} |filter:search | orderBy:['committee_id'] | itemsPerPage: 10" pagination-id="committee-house">
+                                            <td>
+                                                <button class="btn btn-default" ng-click="toggleLocalStorageFavorite(r.committee_id)"><i class="fa {{r.favorite ? 'fa-star':'fa-star-o'}}"></i>&nbsp;
+                                                </button>
+                                            </td>
+                                            <td class="text-capitalize">
+                                                <img ng-if="r.chamber==='house'" src="images/h.png" height="20" width="20"/>
+                                                <img ng-if="r.chamber==='senate'" src="images/s.svg" height="20" width="20"/>
+                                                <img ng-if="r.chamber==='joint'" src="images/s.svg" height="20" width="20"/>
+                                                {{r.chamber}}
+                                            </td>
+                                            <td>{{r.committee_id}}</td>
+                                            <td>{{r.name}}</td>
+                                            <td>{{r.parent_committee_id}}</td>
+                                            <td>{{r.phone}}</td>
+                                            <td>{{r.office?r.office:'N.A.'}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <div class="text-center">
                                     <dir-pagination-controls pagination-id="committee-house"></dir-pagination-controls>
                                 </div>
@@ -76,38 +78,40 @@
                                 </div>
                             </div>
                             <div class="panel-body">
-                                <table class="table  table-responsive">
-                                    <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>Chamber</th>
-                                        <th>Committee ID</th>
-                                        <th>Name</th>
-                                        <th>Parent Committee</th>
-                                        <th>Contact</th>
-                                        <th>Office</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr dir-paginate="r in results | filter:{chamber:'senate'} |filter:search | orderBy:['committee_id'] | itemsPerPage: 10" pagination-id="committee-senate">
-                                        <td>
-                                            <button class="btn btn-default" ng-click="toggleLocalStorageFavorite(r.committee_id)"><i class="fa {{r.favorite ? 'fa-star':'fa-star-o'}}"></i>&nbsp;
-                                            </button>
-                                        </td>
-                                        <td class="text-capitalize">
-                                            <img ng-if="r.chamber==='house'" src="images/h.png" height="20" width="20"/>
-                                            <img ng-if="r.chamber==='senate'" src="images/s.svg" height="20" width="20"/>
-                                            <img ng-if="r.chamber==='joint'" src="images/s.svg" height="20" width="20"/>
-                                            {{r.chamber}}
-                                        </td>
-                                        <td>{{r.committee_id}}</td>
-                                        <td>{{r.name}}</td>
-                                        <td>{{r.parent_committee_id}}</td>
-                                        <td>{{r.phone}}</td>
-                                        <td>{{r.office?r.office:'N.A.'}}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Chamber</th>
+                                            <th>Committee ID</th>
+                                            <th>Name</th>
+                                            <th>Parent Committee</th>
+                                            <th>Contact</th>
+                                            <th>Office</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr dir-paginate="r in results | filter:{chamber:'senate'} |filter:search | orderBy:['committee_id'] | itemsPerPage: 10" pagination-id="committee-senate">
+                                            <td>
+                                                <button class="btn btn-default" ng-click="toggleLocalStorageFavorite(r.committee_id)"><i class="fa {{r.favorite ? 'fa-star':'fa-star-o'}}"></i>&nbsp;
+                                                </button>
+                                            </td>
+                                            <td class="text-capitalize">
+                                                <img ng-if="r.chamber==='house'" src="images/h.png" height="20" width="20"/>
+                                                <img ng-if="r.chamber==='senate'" src="images/s.svg" height="20" width="20"/>
+                                                <img ng-if="r.chamber==='joint'" src="images/s.svg" height="20" width="20"/>
+                                                {{r.chamber}}
+                                            </td>
+                                            <td>{{r.committee_id}}</td>
+                                            <td>{{r.name}}</td>
+                                            <td>{{r.parent_committee_id}}</td>
+                                            <td>{{r.phone}}</td>
+                                            <td>{{r.office?r.office:'N.A.'}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <div class="text-center">
                                     <dir-pagination-controls pagination-id="committee-senate"></dir-pagination-controls>
                                 </div>
@@ -127,38 +131,40 @@
                                 </div>
                             </div>
                             <div class="panel-body">
-                                <table class="table  table-responsive">
-                                    <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>Chamber</th>
-                                        <th>Committee ID</th>
-                                        <th>Name</th>
-                                        <th>Parent Committee</th>
-                                        <th>Contact</th>
-                                        <th>Office</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr dir-paginate="r in results | filter:{chamber:'joint'} | filter:search | orderBy:['committee_id'] | itemsPerPage: 10" pagination-id="committee-joint">
-                                        <td>
-                                            <button class="btn btn-default" ng-click="toggleLocalStorageFavorite(r.committee_id)"><i class="fa {{r.favorite ? 'fa-star':'fa-star-o'}}"></i>&nbsp;
-                                            </button>
-                                        </td>
-                                        <td class="text-capitalize">
-                                            <img ng-if="r.chamber==='house'" src="images/h.png" height="20" width="20"/>
-                                            <img ng-if="r.chamber==='senate'" src="images/s.svg" height="20" width="20"/>
-                                            <img ng-if="r.chamber==='joint'" src="images/s.svg" height="20" width="20"/>
-                                            {{r.chamber}}
-                                        </td>
-                                        <td>{{r.committee_id}}</td>
-                                        <td>{{r.name}}</td>
-                                        <td>{{r.parent_committee_id}}</td>
-                                        <td>{{r.phone}}</td>
-                                        <td>{{r.office?r.office:'N.A.'}}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Chamber</th>
+                                            <th>Committee ID</th>
+                                            <th>Name</th>
+                                            <th>Parent Committee</th>
+                                            <th>Contact</th>
+                                            <th>Office</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr dir-paginate="r in results | filter:{chamber:'joint'} | filter:search | orderBy:['committee_id'] | itemsPerPage: 10" pagination-id="committee-joint">
+                                            <td>
+                                                <button class="btn btn-default" ng-click="toggleLocalStorageFavorite(r.committee_id)"><i class="fa {{r.favorite ? 'fa-star':'fa-star-o'}}"></i>&nbsp;
+                                                </button>
+                                            </td>
+                                            <td class="text-capitalize">
+                                                <img ng-if="r.chamber==='house'" src="images/h.png" height="20" width="20"/>
+                                                <img ng-if="r.chamber==='senate'" src="images/s.svg" height="20" width="20"/>
+                                                <img ng-if="r.chamber==='joint'" src="images/s.svg" height="20" width="20"/>
+                                                {{r.chamber}}
+                                            </td>
+                                            <td>{{r.committee_id}}</td>
+                                            <td>{{r.name}}</td>
+                                            <td>{{r.parent_committee_id}}</td>
+                                            <td>{{r.phone}}</td>
+                                            <td>{{r.office?r.office:'N.A.'}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <div class="text-center">
                                     <dir-pagination-controls pagination-id="committee-joint"></dir-pagination-controls>
                                 </div>
