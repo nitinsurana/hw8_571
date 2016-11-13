@@ -1,10 +1,10 @@
 //TODO Maybe split the legislators table in a separate angularjs component & template in .html file
 //TODO show loader while any table is loading for e.g. legislator
 //TODO show "no data found" message in legislator_details when no data found
-//TODO Mobile screen responsiveness (check the video)
-//TODO deploy on AWS for 571
 //TODO instead of creating entirely new active & new bills <table> => create a component and use it with different filters
 //TODO Conform to the additional requirements mentioned here - https://piazza.com/class/iq15q6i9gsk1xg?cid=621
+//TODO find image for the missing party in legislators-state list
+
 
 'use strict';
 
@@ -230,4 +230,10 @@ app.controller('LegislatorHouseController', function LegislatorHouseController($
 
 app.controller('LegislatorSenateController', function LegislatorHouseController($scope, $http) {
     var self = this;
+});
+
+$(document).ready(function () {
+    $(document).scroll(function () {
+        $(".side-nav").height(Math.max($(".content").height(), window.innerHeight));
+    });
 });
