@@ -3,7 +3,6 @@
 //TODO show "no data found" message in legislator_details when no data found
 //TODO instead of creating entirely new active & new bills <table> => create a component and use it with different filters
 //TODO Conform to the additional requirements mentioned here - https://piazza.com/class/iq15q6i9gsk1xg?cid=621
-//TODO find image for the missing party in legislators-state list
 
 
 'use strict';
